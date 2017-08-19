@@ -9,6 +9,9 @@ Example
 
 https://frankl.in/speedtest/
 
+You can change the number precision up to 3 decimals using the arrow
+keys on your keyboard.
+
 
 Installation
 ------------
