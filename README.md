@@ -71,3 +71,6 @@ Author
 ------
 
 [Franklin van de Meent](https://frankl.in)
+
+Do you like this project?
+Please consider to [buy me a coffee](https://ko-fi.com/franklin).
