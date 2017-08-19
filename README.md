@@ -25,7 +25,6 @@ You can download them from my server, **please don't hotlink them!!**
 * [5mb.bin](https://frankl.in/speedtest/5mb.bin)
 * [10mb.bin](https://frankl.in/speedtest/10mb.bin)
 * [100mb.bin](https://frankl.in/speedtest/100mb.bin)
-* [1000mb.bin](https://frankl.in/speedtest/1000mb.bin)
 
 Or generate them yourself:
 
