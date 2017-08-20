@@ -53,9 +53,19 @@ Note on testing
 ---------------
 
 With these kind of tools you are testing the available bandwidth of
-the slowest connection between your device and the host. For example,
-when your web server connection is slower than your own network, you
-are actually testing the server's bandwidth instead of your own.
+the slowest connection between your device and the host. When your web
+server connection is slower than your own network, you are actually
+testing the server's bandwidth instead of your own.
+
+There can be many causes for slow connections, like the type of wiring,
+other devices, interference, packetloss or the peering between network
+providers somewhere along the route.
+
+For example, I tested this speedtest from my own server to my home
+network both connected from Amsterdam and I got only 70 Mbit but using
+my provider's speedtest I get double at least. Doing the same to my
+LiquidSky box in Frankfurt I easily get over 900 Mbit. So there is a
+bottleneck somewhere between the web server and my home ISP.
 
 
 Unlicense
