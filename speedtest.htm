@@ -142,7 +142,7 @@
           return result;
         }
 
-        if (deci && !~result.indexOf ('.')) {
+        if (!~result.indexOf ('.')) {
           missing = deci;
           result += '.';
         } else {
@@ -220,7 +220,7 @@
           req.abort ();
         }
 
-        req = new XMLHttpRequest ();
+        req = new XMLHttpRequest;
 
         start = Date.now ();
         count = 0;
@@ -231,6 +231,7 @@
         });
 
         ev.target.className = 'choice';
+        document.querySelector ('progress').value = 0;
         document.querySelector ('progress').style.visibility = 'visible';
 
         req.onreadystatechange = () => {
