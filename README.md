@@ -7,7 +7,7 @@ Simple bandwidth test in browser javascript.
 Example
 -------
 
-https://frankl.in/speedtest/
+<https://frankl.in/speedtest/>
 
 You can change the number precision up to 3 decimals using the arrow
 keys on your keyboard.
@@ -16,10 +16,13 @@ keys on your keyboard.
 Installation
 ------------
 
-Just clone the repo or download the `speedtest.htm` file.
+Just clone the repo or download the
+[speedtest.htm](https://github.com/fvdm/speedtest/raw/master/speedtest.htm).
 
 To keep the repository small I have not included the test binaries.
-You can download them from my server, **please don't hotlink them!!**
+You can download them from my server.
+
+**Please don't hotlink these!!**
 
 * [1mb.bin](https://frankl.in/speedtest/1mb.bin)
 * [5mb.bin](https://frankl.in/speedtest/5mb.bin)
@@ -33,7 +36,7 @@ where the M suffix is megabytes and G is gigabytes.
 
 ```sh
 # 100mb.bin
-$ dd if=/dev/zero of=100mb.bin bs=100M count=1
+dd if=/dev/zero of=100mb.bin bs=100M count=1
 ```
 
 
