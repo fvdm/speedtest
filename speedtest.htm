@@ -167,11 +167,15 @@
        */
 
       function testDone () {
-        const diff = dec ((Date.now() - start) / 1000, 2);
+        const diff = (Date.now() - start) / 1000;
+
+        if (req.readyState !== 4) {
+          return;
+        }
 
         document.querySelector ('progress').style.visibility = 'hidden';
         document.querySelector ('#result').className = 'resultDone';
-        document.querySelector ('#eta').innerHTML = diff + ' sec';
+        document.querySelector ('#eta').innerHTML = dec (diff, 2) + ' sec';
         req = null;
       }
 
@@ -234,13 +238,10 @@
         document.querySelector ('progress').value = 0;
         document.querySelector ('progress').style.visibility = 'visible';
 
-        req.onreadystatechange = () => {
-          if (req.readyState === 4) {
-            testDone ();
-          }
-        };
-
         req.onprogress = testRunning;
+        req.onreadystatechange = testDone;
+
+        // load file avoiding the cache
         req.open ('GET', ev.target.dataset.file + '?' + start, true);
         req.send (null);
       }
