@@ -43,6 +43,15 @@ dd if=/dev/zero of=100mb.bin bs=100M count=1
 ```
 
 
+Note on testing
+---------------
+
+With these kind of tools you are testing the available bandwidth of
+the slowest connection between your device and the host. For example,
+when your web server connection is slower than your own network, you
+are actually testing the server's bandwidth instead of your own.
+
+
 Unlicense
 ---------
 
