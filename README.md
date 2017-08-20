@@ -3,6 +3,12 @@ speedtest
 
 Simple bandwidth test in browser javascript.
 
+- [Example](#example)
+- [Installation](#installation)
+- [Note on testing](#note-on-testing)
+- [Unlicense](#unlicense)
+- [Author](#author)
+
 
 Example
 -------
