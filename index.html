@@ -127,7 +127,7 @@
         let result;
         let missing;
         let i;
-        
+
         // rounding
         if (deci) {
           amount = Math.pow (10, deci || 1);
@@ -149,7 +149,7 @@
         } else {
           missing = deci - result.split ('.')[1].length;
         }
-          
+
         if (missing) {
           for (i = missing; i > 0; i--) {
             result += '0';
