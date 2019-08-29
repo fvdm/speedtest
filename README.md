@@ -13,7 +13,7 @@ Simple bandwidth test in browser javascript.
 Example
 -------
 
-<https://frankl.in/speedtest/>
+<https://fvdm.com/speedtest/>
 
 You can change the number precision up to 3 decimals using the arrow
 keys on your keyboard.
@@ -33,10 +33,10 @@ You can download them from my server.
 
 **Please don't hotlink these!!**
 
-* [1mb.bin](https://frankl.in/speedtest/1mb.bin)
-* [5mb.bin](https://frankl.in/speedtest/5mb.bin)
-* [10mb.bin](https://frankl.in/speedtest/10mb.bin)
-* [100mb.bin](https://frankl.in/speedtest/100mb.bin)
+* [1mb.bin](https://fvdm.com/speedtest/1mb.bin)
+* [5mb.bin](https://fvdm.com/speedtest/5mb.bin)
+* [10mb.bin](https://fvdm.com/speedtest/10mb.bin)
+* [100mb.bin](https://fvdm.com/speedtest/100mb.bin)
 
 Or generate them yourself:
 
@@ -100,7 +100,7 @@ For more information, please refer to <http://unlicense.org/>
 Author
 ------
 
-[Franklin van de Meent](https://frankl.in)
+[Franklin van de Meent](https://fra.nkl.in)
 
 Do you like this project?
 Please consider to [buy me a coffee](https://ko-fi.com/franklin).
