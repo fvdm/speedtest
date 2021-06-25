@@ -40,13 +40,17 @@ You can download them from my server.
 
 Or generate them yourself:
 
-The `of=` specifies the output filename and `bs=` the filesize in bytes
-where the M suffix is megabytes and G is gigabytes.
-
 ```sh
-# 100mb.bin
-dd if=/dev/zero of=100mb.bin bs=100M count=1
+# on linux
+for i in 100m 10m 5m 1m; do fallocate -l $i "${i}b.bin"; done
+
+# on macOS
+for i in 100m 10m 5m 1m; do mkfile -n $i "${i}b.bin"; done
 ```
+
+These commands only create the files in the filesystem.
+No bytes are actually written to the storage.
+The suffix `m` is megabytes and `g` is gigabytes and so on.
 
 
 Note on testing
