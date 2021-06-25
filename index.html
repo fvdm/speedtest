@@ -145,7 +145,7 @@
           return result;
         }
 
-        if (!~result.indexOf ('.')) {
+        if (result.indexOf ('.') > -1) {
           missing = deci;
           result += '.';
         } else {
