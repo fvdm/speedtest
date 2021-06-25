@@ -38,14 +38,22 @@ You can download them from my server.
 * [10mb.bin](https://fvdm.com/speedtest/10mb.bin)
 * [100mb.bin](https://fvdm.com/speedtest/100mb.bin)
 
-Or generate them yourself:
+Or instantly generate them yourself: (faster)
 
 ```sh
 # on linux
-for i in 100m 10m 5m 1m; do fallocate -l $i "${i}b.bin"; done
+fallocate -l 1m 1mb.bin
+fallocate -l 5m 5mb.bin
+fallocate -l 10m 10mb.bin
+fallocate -l 100m 100mb.bin
+fallocate -l 1000m 1000mb.bin
 
 # on macOS
-for i in 100m 10m 5m 1m; do mkfile -n $i "${i}b.bin"; done
+mkfile -n 1m 1mb.bin
+mkfile -n 5m 5mb.bin
+mkfile -n 10m 10mb.bin
+mkfile -n 100m 100mb.bin
+mkfile -n 1000m 1000mb.bin
 ```
 
 These commands only create the files in the filesystem.
@@ -98,7 +106,7 @@ OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-For more information, please refer to <http://unlicense.org/>
+For more information, please refer to <https://unlicense.org/>
 
 
 Author
@@ -108,3 +116,4 @@ Author
 
 Do you like this project?
 Please consider to [buy me a coffee](https://ko-fi.com/franklin).
+Please consider to [buy me a coffee](https://fvdm.com/donating/).
