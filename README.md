@@ -29,16 +29,8 @@ git clone https://github.com/fvdm/speedtest
 ```
 
 To keep the repository small I have not included the test binaries.
-You can download them from my server.
 
-**Please don't hotlink these!!**
-
-* [1mb.bin](https://fvdm.com/speedtest/1mb.bin)
-* [5mb.bin](https://fvdm.com/speedtest/5mb.bin)
-* [10mb.bin](https://fvdm.com/speedtest/10mb.bin)
-* [100mb.bin](https://fvdm.com/speedtest/100mb.bin)
-
-Or instantly generate them yourself: (faster)
+You can instantly generate them yourself:
 
 ```sh
 # on linux
@@ -59,6 +51,16 @@ mkfile -n 1000m 1000mb.bin
 These commands only create the files in the filesystem.
 No bytes are actually written to the storage.
 The suffix `m` is megabytes and `g` is gigabytes and so on.
+
+Or you can download them from my server.
+
+**Please don't hotlink these!!**
+
+* [1mb.bin](https://fvdm.com/speedtest/1mb.bin)
+* [5mb.bin](https://fvdm.com/speedtest/5mb.bin)
+* [10mb.bin](https://fvdm.com/speedtest/10mb.bin)
+* [100mb.bin](https://fvdm.com/speedtest/100mb.bin)
+
 
 
 Note on testing
@@ -112,8 +114,7 @@ For more information, please refer to <https://unlicense.org/>
 Author
 ------
 
-[Franklin van de Meent](https://fra.nkl.in)
+[Franklin](https://fvdm.com)
 
 Do you like this project?
-Please consider to [buy me a coffee](https://ko-fi.com/franklin).
 Please consider to [buy me a coffee](https://fvdm.com/donating/).
