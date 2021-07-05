@@ -288,7 +288,7 @@
         };
 
         // load file avoiding the cache
-        req.open ('GET', btnEv.target.dataset.file + '?' + start, true);
+        req.open ('GET', btnEv.target.dataset.file + '?nocache=' + start, true);
         req.responseType = 'blob';
         req.send (null);
       }
@@ -324,7 +324,7 @@
           };
         }
 
-        req.open ('PUT', 'test.upload', true);
+        req.open ('POST', '?nocache=' + start, true);
         req.send (binaryData);
       }
     </script>
