@@ -40,7 +40,17 @@
         width: 100%;
         height: 30px;
         -webkit-appearance: none;
+        -moz-appearance: none;
+        appearence: none;
+        border: none;
         visibility: hidden;
+        background-color: #b4ffe0;
+        transition-timing-function: linear;
+      progress::-webkit-progress-value {
+        transition: width 100ms;
+      }
+      progress[value] {
+        background-color: #00ff9a;
       }
       progress::-webkit-progress-bar {
         background-color: #b4ffe0;
