@@ -2,7 +2,7 @@
 <html>
   <head>
     <!--
-      Author:  Franklin van de Meent (https://fra.nkl.in)
+      Author:  Franklin (https://fvdm.com)
       Source:  https://github.com/fvdm/speedtest
     -->
     <title>Speedtest</title>
@@ -46,6 +46,7 @@
         visibility: hidden;
         background-color: #b4ffe0;
         transition-timing-function: linear;
+      }
       progress::-webkit-progress-value {
         transition: width 100ms;
       }
@@ -73,11 +74,12 @@
   <body>
     <div id="wrap">
       <p>
-        <button data-file="1mb.bin">1 M</button>
         <button data-file="5mb.bin">5 M</button>
         <button data-file="10mb.bin">10 M</button>
         <button data-file="100mb.bin">100 M</button>
-        <button data-file="1000mb.bin">1000 M</button>
+        <button data-file="200mb.bin">200 M</button>
+        <button data-file="500mb.bin">500 M</button>
+        <button data-file="1000mb.bin">1 G</button>
       </p>
       <p>
         <progress value="0" max="100"></progress>
