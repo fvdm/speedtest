@@ -40,7 +40,18 @@
         width: 100%;
         height: 30px;
         -webkit-appearance: none;
+        -moz-appearance: none;
+        appearence: none;
+        border: none;
         visibility: hidden;
+        background-color: #b4ffe0;
+        transition-timing-function: linear;
+      }
+      progress::-webkit-progress-value {
+        transition: width 100ms;
+      }
+      progress[value] {
+        background-color: #00ff9a;
       }
       progress::-webkit-progress-bar {
         background-color: #b4ffe0;
@@ -50,26 +61,25 @@
       }
       #result {
         font-size: 1.5rem;
-        font-variant-numeric: tabular-nums;
       }
       #resultDone {
-        font-size: 2rem;
+        font-size: .8rem;
         font-weight: bold;
       }
       #eta {
         font-size: 1rem;
-        font-variant-numeric: tabular-nums;
       }
     </style>
   </head>
   <body>
     <div id="wrap">
       <p>
-        <button data-file="1mb.bin">1 MB</button>
-        <button data-file="5mb.bin">5 MB</button>
-        <button data-file="10mb.bin">10 MB</button>
-        <button data-file="100mb.bin">100 MB</button>
-        <button data-file="1000mb.bin">1000 MB</button>
+        <button data-file="5mb.bin">5 M</button>
+        <button data-file="10mb.bin">10 M</button>
+        <button data-file="100mb.bin">100 M</button>
+        <button data-file="200mb.bin">200 M</button>
+        <button data-file="500mb.bin">500 M</button>
+        <button data-file="1000mb.bin">1 G</button>
       </p>
       <p>
         <progress value="0" max="100"></progress>
@@ -83,10 +93,15 @@
     <script>
       // global vars
       let req;
+      let avg = {};
       let start = 0;
       let count = 0;
       let sum = 0;
       let decimals = 0;
+
+      let binaryData;
+      let resultDownSec = 0;
+      let resultUpSec = 0;
 
       // control precision
       function onKeyDown (ev) {
@@ -169,17 +184,29 @@
        * @return  {void}
        */
 
-      function testDone () {
+      function testDone (updown, evBtn, evReq) {
         const diff = (Date.now() - start) / 1000;
 
-        if (req.readyState !== 4) {
-          return;
-        }
+        if (updown === 'download') {
+          binaryData = req.response;
+          resultDownSec = diff;
+          testUpload (evBtn);
+        } else {
+          binaryData = null;
+          resultUpSec = diff;
+          resultString = 
+              dec (avg.download, 1)
+            + ' / ' + dec (avg.upload, 1)
+            + ' Mb'
+          ;
 
-        document.querySelector ('progress').style.visibility = 'hidden';
-        document.querySelector ('#result').className = 'resultDone';
-        document.querySelector ('#eta').innerHTML = dec (diff, 2) + ' sec';
-        req = null;
+          document.querySelector ('progress').style.visibility = 'hidden';
+          document.querySelector ('#result').className = 'resultDone';
+          document.querySelector ('#result').innerHTML = resultString;
+          document.querySelector ('#eta').innerHTML = dec (diff, 2) + ' sec';
+
+          req = null;
+        }
       }
 
 
@@ -190,26 +217,35 @@
        * @return  {void}
        */
 
-      function testRunning (ev) {
+      function testRunning (updown, ev) {
         const now = Date.now ();
 
         let percent = 0.0;
         let Bps = 0;
-        let avg = 0;
+        avg[updown] = 0;
         let eta = 0;
+        let total = ev.total;
+        let diff = 0;
 
-        if (ev.lengthComputable && ev.total > 0) {
-          Bps = ev.loaded / ((now - start) / 1000);
+        if (updown === 'upload') {
+          total = binaryData.size;
+        }
+
+        if (ev.lengthComputable && ev.totalSize > 0) {
+          diff = (now - start) / 1000;
+          Bps = ev.loaded / diff;
           mbit = Bps / 1024 / 1024 * 8;
-          count++;
-          sum += mbit;
-          avg = sum / count;
-          percent = ev.loaded / ev.total * 100.0;
-          eta = (ev.total - ev.loaded) / Bps;
+          avg[updown] = mbit;
+          percent = ev.loaded / ev.totalSize * 100.0;
+          eta = (ev.totalSize - ev.loaded) / Bps;
+        }
+
+        if (updown === 'upload') {
+          percent = 100 - percent;
         }
 
         document.querySelector ('progress').value = percent;
-        document.querySelector ('#result').innerHTML = dec (avg, decimals) + ' Mbit/s';
+        document.querySelector ('#result').innerHTML = dec (avg[updown], decimals) + ' Mbit/s';
         document.querySelector ('#eta').innerHTML = dec (eta, decimals) + ' sec';
       }
 
@@ -222,7 +258,7 @@
        * @return  {void}
        */
 
-      function testDownload (ev) {
+      function testDownload (btnEv) {
         if (req) {
           req.abort ();
         }
@@ -237,16 +273,59 @@
           btn.className = '';
         });
 
-        ev.target.className = 'choice';
+        btnEv.target.className = 'choice';
         document.querySelector ('progress').value = 0;
         document.querySelector ('progress').style.visibility = 'visible';
 
-        req.onprogress = testRunning;
-        req.onreadystatechange = testDone;
+        req.onprogress = (progEv) => {
+          testRunning ('download', progEv);
+        };
+
+        req.onreadystatechange = (reqEv) => {
+          if (req.readyState === 4) {
+            testDone ('download', btnEv, reqEv);
+          }
+        };
 
         // load file avoiding the cache
-        req.open ('GET', ev.target.dataset.file + '?' + start, true);
+        req.open ('GET', btnEv.target.dataset.file + '?nocache=' + start, true);
+        req.responseType = 'blob';
         req.send (null);
+      }
+
+      function testUpload (btnEv) {
+        if (req) {
+          req.abort ();
+        }
+
+        req = new XMLHttpRequest;
+
+        start = Date.now ();
+        count = 0;
+        sum = 0;
+
+        if (req.upload) {
+          req.upload.onprogress = (progEv) => {
+            testRunning ('upload', progEv);
+          };
+
+          req.upload.onloadend = (reqEv) => {
+            testDone ('upload', btnEv, reqEv);
+          };
+        } else {
+          req.onprogress = (progEv) => {
+            testRunning ('upload', progEv);
+          };
+
+          req.onreadystatechange = onreadystatechange = (reqEv) => {
+            if (req.readyState === 4) {
+              testDone ('upload', btnEv, reqEv);
+            }
+          };
+        }
+
+        req.open ('POST', '?nocache=' + start, true);
+        req.send (binaryData);
       }
     </script>
   </body>
