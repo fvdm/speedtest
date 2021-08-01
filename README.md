@@ -1,7 +1,14 @@
-speedtest
-=========
+# Speedtest
 
-Simple bandwidth test in browser javascript.
+Simple down/upload bandwidth test in browser javascript.
+
+It has a simple interface with only the essentials.
+There are no dependencies other than the binary files.
+It doesn't even require a backend language such as PHP
+and runs great on static hosting.
+
+You simply upload the `index.html` file and generate
+the binary testing files.
 
 - [Example](#example)
 - [Installation](#installation)
@@ -10,23 +17,35 @@ Simple bandwidth test in browser javascript.
 - [Author](#author)
 
 
-Example
--------
+## Example
 
-<https://fvdm.com/speedtest/>
+The link below has the same HTML file (with stats)
+and is basic static webhosting with no backend
+processing. The test files were generated using the
+`fallocate` command.
+
+<https://speedtest.fvdm.com/>
 
 You can change the number precision up to 3 decimals using the arrow
 keys on your keyboard.
 
 
-Installation
-------------
+## Installation
 
 Just clone the repo:
 
 ```sh
 git clone https://github.com/fvdm/speedtest
 ```
+
+Or download the [`index.html`](https://raw.githubusercontent.com/fvdm/speedtest/master/index.html) file:
+
+```sh
+wget https://raw.githubusercontent.com/fvdm/speedtest/master/index.html
+```
+
+
+### Binary files
 
 To keep the repository small I have not included the test binaries.
 
@@ -62,9 +81,7 @@ Or you can download them from my server.
 * [100mb.bin](https://fvdm.com/speedtest/100mb.bin)
 
 
-
-Note on testing
----------------
+## Note on testing
 
 With these kind of tools you are testing the available bandwidth of
 the slowest connection between your device and the host. When your web
@@ -80,6 +97,10 @@ network both connected from Amsterdam and I got only 70 Mbit but using
 my provider's speedtest I get double at least. Doing the same to my
 LiquidSky box in Frankfurt I easily get over 900 Mbit. So there is a
 bottleneck somewhere between the web server and my home ISP.
+
+The speedtest is at its best when the connection is as
+short as possible. For example, on your NAS or RPi to
+check on your LAN bandwidth.
 
 
 Unlicense
