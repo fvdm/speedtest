@@ -105,13 +105,8 @@
       let req;
       let avg = {};
       let start = 0;
-      let count = 0;
-      let sum = 0;
       let decimals = 0;
-
       let binaryData;
-      let resultDownSec = 0;
-      let resultUpSec = 0;
 
       // control precision
       function onKeyDown (ev) {
@@ -159,7 +154,8 @@
         if (deci) {
           amount = Math.pow (10, deci || 1);
           result = Math.round (num * amount) / amount;
-        } else {
+        }
+        else {
           result = Math.round (num);
         }
 
@@ -173,7 +169,8 @@
         if (result.indexOf ('.') > -1) {
           missing = deci;
           result += '.';
-        } else {
+        }
+        else {
           missing = deci - result.split ('.')[1].length;
         }
 
@@ -199,11 +196,10 @@
 
         if (updown === 'download') {
           binaryData = req.response;
-          resultDownSec = diff;
           testUpload (evBtn);
-        } else {
+        }
+        else {
           binaryData = null;
-          resultUpSec = diff;
           resultString = 
               dec (avg.download, 1)
             + ' / ' + dec (avg.upload, 1)
@@ -274,10 +270,7 @@
         }
 
         req = new XMLHttpRequest;
-
         start = Date.now ();
-        count = 0;
-        sum = 0;
 
         btns.forEach (btn => {
           btn.className = '';
@@ -309,10 +302,7 @@
         }
 
         req = new XMLHttpRequest;
-
         start = Date.now ();
-        count = 0;
-        sum = 0;
 
         if (req.upload) {
           req.upload.onprogress = (progEv) => {
