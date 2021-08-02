@@ -26,6 +26,7 @@
         background-color: #fff;
         text-align: center;
       }
+
       button {
         padding: 0.8rem;
         border: 0;
@@ -36,6 +37,7 @@
       button.choice {
         background-color: #ffc800;
       }
+
       progress {
         width: 100%;
         height: 30px;
@@ -47,18 +49,26 @@
         background-color: #b4ffe0;
         transition-timing-function: linear;
       }
-      progress::-webkit-progress-value {
-        transition: width 100ms;
-      }
       progress[value] {
+        transition: width 100ms;
         background-color: #00ff9a;
       }
+
       progress::-webkit-progress-bar {
         background-color: #b4ffe0;
       }
+      progress::-moz-progress-bar {
+        background-color: #b4ffe0;
+      }
       progress::-webkit-progress-value {
+        transition: width 100ms;
         background-color:#00ff9a;
       }
+      progress::-moz-progress-value {
+        transition: width 100ms;
+        background-color:#00ff9a;
+      }
+
       #result {
         font-size: 1.5rem;
       }
@@ -231,13 +241,13 @@
           total = binaryData.size;
         }
 
-        if (ev.lengthComputable && ev.totalSize > 0) {
+        if (ev.lengthComputable && total) {
           diff = (now - start) / 1000;
           Bps = ev.loaded / diff;
           mbit = Bps / 1024 / 1024 * 8;
           avg[updown] = mbit;
-          percent = ev.loaded / ev.totalSize * 100.0;
-          eta = (ev.totalSize - ev.loaded) / Bps;
+          percent = ev.loaded / total * 100.0;
+          eta = (total - ev.loaded) / Bps;
         }
 
         if (updown === 'upload') {
@@ -312,7 +322,8 @@
           req.upload.onloadend = (reqEv) => {
             testDone ('upload', btnEv, reqEv);
           };
-        } else {
+        }
+        else {
           req.onprogress = (progEv) => {
             testRunning ('upload', progEv);
           };
