@@ -145,43 +145,26 @@
        */
 
       function dec (num, deci) {
-        let amount;
-        let result;
-        let missing;
-        let i;
+        const int = parseInt (num, 10);
+        const flo = parseFloat ((num % 1).toFixed(deci));
+        const len = (String (flo).split ('.')[1] || '').length;
+        const diff = deci - len;
+        let res = String (int + flo);
 
-        // rounding
-        if (deci) {
-          amount = Math.pow (10, deci || 1);
-          result = Math.round (num * amount) / amount;
-        }
-        else {
-          result = Math.round (num);
-        }
-
-        // force trailing zeros
-        result = String (result);
-
-        if (!deci) {
-          return result;
-        }
-
-        if (result.indexOf ('.') > -1) {
-          missing = deci;
-          result += '.';
-        }
-        else {
-          missing = deci - result.split ('.')[1].length;
-        }
-
-        if (missing) {
-          for (i = missing; i > 0; i--) {
-            result += '0';
+        if (!flo && diff) {
+          res += '.';
+          for (let i = 0; i < diff; i++) {
+            res += '0';
           }
         }
 
-        // done
-        return result;
+        if (flo && diff > 0) {
+          for (let i = 0; i < diff; i++) {
+            res += '0';
+          }
+        }
+
+        return res;
       }
 
 
