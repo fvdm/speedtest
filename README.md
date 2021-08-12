@@ -65,6 +65,13 @@ mkfile -n 5m 5mb.bin
 mkfile -n 10m 10mb.bin
 mkfile -n 100m 100mb.bin
 mkfile -n 1000m 1000mb.bin
+
+# others like Synology
+dd if=/dev/zero of=1mb.bin bs=1 count=0 seek=1M
+dd if=/dev/zero of=5mb.bin bs=1 count=0 seek=5M
+dd if=/dev/zero of=10mb.bin bs=1 count=0 seek=10M
+dd if=/dev/zero of=100mb.bin bs=1 count=0 seek=100M
+dd if=/dev/zero of=1000mb.bin bs=1 count=0 seek=1000M
 ```
 
 These commands only create the files in the filesystem.
@@ -73,7 +80,7 @@ The suffix `m` is megabytes and `g` is gigabytes and so on.
 
 Or you can download them from my server.
 
-**Please don't hotlink these!!**
+**Please don't hotlink!!**
 
 * [1mb.bin](https://fvdm.com/speedtest/1mb.bin)
 * [5mb.bin](https://fvdm.com/speedtest/5mb.bin)
