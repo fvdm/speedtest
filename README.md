@@ -66,6 +66,14 @@ mkfile -n 10m 10mb.bin
 mkfile -n 100m 100mb.bin
 mkfile -n 1000m 1000mb.bin
 
+# on Windows
+# Open the Command Prompt as Administrator
+fsutil file createnew 1mb.bin 1000000
+fsutil file createnew 5mb.bin 5000000
+fsutil file createnew 10mb.bin 10000000
+fsutil file createnew 100mb.bin 100000000
+fsutil file createnew 1000mb.bin 1000000000
+
 # others like Synology
 dd if=/dev/zero of=1mb.bin bs=1 count=0 seek=1M
 dd if=/dev/zero of=5mb.bin bs=1 count=0 seek=5M
