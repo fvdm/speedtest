@@ -304,7 +304,7 @@
         };
 
         // load file avoiding the cache
-        req.open ('GET', btnEv.target.dataset.file + '?nocache=' + start, true);
+        req.open ('GET', btnEv.target.dataset.file, true);
         req.responseType = 'blob';
         req.send (null);
       }
