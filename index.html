@@ -139,8 +139,8 @@
       let binaryData;
 
       // control precision
-      function onKeyDown (ev) {
-        switch (ev.code) {
+      function onKeyDown( ev ) {
+        switch ( ev.code ) {
           case 'ArrowUp':
           case 'ArrowRight':
             decimals++;
@@ -155,15 +155,15 @@
         }
       }
 
-      document.addEventListener ('keydown', onKeyDown);
+      document.addEventListener( 'keydown', onKeyDown );
 
       // store <button> tags in array
-      const btns = Array.from (document.querySelectorAll ('button'));
+      const btns = Array.from( document.querySelectorAll( 'button' ) );
 
       // add click handler to buttons
-      btns.forEach (btn => {
-        btn.addEventListener ('click', testDownload);
-      });
+      btns.forEach( btn => {
+        btn.addEventListener( 'click', testDownload );
+      } );
 
 
       /**
@@ -174,22 +174,22 @@
        * @return  {string}        Rounded number with trailing zeros
        */
 
-      function dec (num, deci) {
-        const int = parseInt (num, 10);
-        const flo = parseFloat ((num % 1).toFixed(deci));
-        const len = (String (flo).split ('.')[1] || '').length;
+      function dec ( num, deci ) {
+        const int = parseInt( num, 10 );
+        const flo = parseFloat( ( num % 1 ).toFixed( deci ) );
+        const len = ( String( flo ).split( '.' )[1] || '' ).length;
         const diff = deci - len;
-        let res = String (int + flo);
+        let res = String( int + flo );
 
-        if (!flo && diff) {
+        if ( ! flo && diff ) {
           res += '.';
-          for (let i = 0; i < diff; i++) {
+          for ( let i = 0; i < diff; i++ ) {
             res += '0';
           }
         }
 
-        if (flo && diff > 0) {
-          for (let i = 0; i < diff; i++) {
+        if ( flo && diff > 0 ) {
+          for ( let i = 0; i < diff; i++ ) {
             res += '0';
           }
         }
@@ -204,25 +204,25 @@
        * @return  {void}
        */
 
-      function testDone (updown, evBtn, evReq) {
-        const diff = (Date.now() - start) / 1000;
+      function testDone( updown, evBtn, evReq ) {
+        const diff = ( Date.now() - start ) / 1000;
 
-        if (updown === 'download') {
+        if ( updown === 'download' ) {
           binaryData = req.response;
-          testUpload (evBtn);
+          testUpload( evBtn );
         }
         else {
           binaryData = null;
           resultString = 
-              dec (avg.download, 1)
-            + ' / ' + dec (avg.upload, 1)
+              dec( avg.download, 1 )
+            + ' / ' + dec( avg.upload, 1 )
             + ' Mb'
           ;
 
-          document.querySelector ('progress').style.visibility = 'hidden';
-          document.querySelector ('#result').className = 'resultDone';
-          document.querySelector ('#result').innerHTML = resultString;
-          document.querySelector ('#eta').innerHTML = dec (diff, 2) + ' sec';
+          document.querySelector( 'progress' ).style.visibility = 'hidden';
+          document.querySelector( '#result' ).className = 'resultDone';
+          document.querySelector( '#result' ).innerHTML = resultString;
+          document.querySelector( '#eta' ).innerHTML = dec( diff, 2 ) + ' sec';
 
           req = null;
         }
@@ -236,8 +236,8 @@
        * @return  {void}
        */
 
-      function testRunning (updown, ev) {
-        const now = Date.now ();
+      function testRunning ( updown, ev ) {
+        const now = Date.now();
 
         let percent = 0.0;
         let Bps = 0;
@@ -246,26 +246,26 @@
         let total = ev.total;
         let diff = 0;
 
-        if (updown === 'upload') {
+        if ( updown === 'upload' ) {
           total = binaryData.size;
         }
 
-        if (ev.lengthComputable && total) {
-          diff = (now - start) / 1000;
+        if ( ev.lengthComputable && total ) {
+          diff = ( now - start ) / 1000;
           Bps = ev.loaded / diff;
           mbit = Bps / 1024 / 1024 * 8;
           avg[updown] = mbit;
           percent = ev.loaded / total * 100.0;
-          eta = (total - ev.loaded) / Bps;
+          eta = ( total - ev.loaded ) / Bps;
         }
 
-        if (updown === 'upload') {
+        if ( updown === 'upload' ) {
           percent = 100 - percent;
         }
 
-        document.querySelector ('progress').value = percent;
-        document.querySelector ('#result').innerHTML = dec (avg[updown], decimals) + ' Mbit/s';
-        document.querySelector ('#eta').innerHTML = dec (eta, decimals) + ' sec';
+        document.querySelector( 'progress' ).value = percent;
+        document.querySelector( '#result' ).innerHTML = dec( avg[updown], decimals ) + ' Mbit/s';
+        document.querySelector( '#eta' ).innerHTML = dec( eta, decimals ) + ' sec';
       }
 
 
@@ -277,69 +277,69 @@
        * @return  {void}
        */
 
-      function testDownload (btnEv) {
-        if (req) {
-          req.abort ();
+      function testDownload ( btnEv ) {
+        if ( req ) {
+          req.abort();
         }
 
         req = new XMLHttpRequest;
-        start = Date.now ();
+        start = Date.now();
 
-        btns.forEach (btn => {
+        btns.forEach( btn => {
           btn.className = '';
-        });
+        } );
 
         btnEv.target.className = 'choice';
-        document.querySelector ('progress').value = 0;
-        document.querySelector ('progress').style.visibility = 'visible';
+        document.querySelector( 'progress' ).value = 0;
+        document.querySelector( 'progress' ).style.visibility = 'visible';
 
-        req.onprogress = (progEv) => {
-          testRunning ('download', progEv);
+        req.onprogress = progEv => {
+          testRunning( 'download', progEv );
         };
 
-        req.onreadystatechange = (reqEv) => {
-          if (req.readyState === 4) {
-            testDone ('download', btnEv, reqEv);
+        req.onreadystatechange = reqEv => {
+          if ( req.readyState === 4 ) {
+            testDone( 'download', btnEv, reqEv );
           }
         };
 
         // load file avoiding the cache
-        req.open ('GET', btnEv.target.dataset.file, true);
+        req.open( 'GET', btnEv.target.dataset.file, true );
         req.responseType = 'blob';
-        req.send (null);
+        req.send( null );
       }
 
-      function testUpload (btnEv) {
-        if (req) {
-          req.abort ();
+      function testUpload ( btnEv ) {
+        if ( req ) {
+          req.abort();
         }
 
         req = new XMLHttpRequest;
-        start = Date.now ();
+        start = Date.now();
 
-        if (req.upload) {
-          req.upload.onprogress = (progEv) => {
-            testRunning ('upload', progEv);
+        if ( req.upload ) {
+          req.upload.onprogress = progEv => {
+            testRunning( 'upload', progEv );
           };
 
-          req.upload.onloadend = (reqEv) => {
-            testDone ('upload', btnEv, reqEv);
+          req.upload.onloadend = reqEv => {
+            testDone( 'upload', btnEv, reqEv );
           };
         }
         else {
-          req.onprogress = (progEv) => {
-            testRunning ('upload', progEv);
+          req.onprogress = progEv => {
+            testRunning( 'upload', progEv );
           };
 
-          req.onreadystatechange = onreadystatechange = (reqEv) => {
-            if (req.readyState === 4) {
-              testDone ('upload', btnEv, reqEv);
+          req.onreadystatechange = onreadystatechange = reqEv => {
+            if ( req.readyState === 4 ) {
+              testDone( 'upload', btnEv, reqEv );
             }
           };
         }
 
-        req.open ('POST', '?nocache=' + start, true);
-        req.send (binaryData);
+        req.open( 'POST', '?nocache=' + start, true );
+        req.send( binaryData );
       }
     </script>
   </body>
