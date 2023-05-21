@@ -8,26 +8,15 @@ It doesn't even require a backend language such as PHP
 and runs great on static hosting.
 
 You simply upload the `index.html` file and generate
-the binary testing files.
+the binary testing files. The number precision can be
+changed up to 3 decimals using the arrow keys on your
+keyboard.
 
 - [Example](#example)
 - [Installation](#installation)
 - [Note on testing](#note-on-testing)
 - [Unlicense](#unlicense)
 - [Author](#author)
-
-
-## Example
-
-The link below has the same HTML file (with stats)
-and is basic static webhosting with no backend
-processing. The test files were generated using the
-`fallocate` command.
-
-<https://speedtest.fvdm.com/>
-
-You can change the number precision up to 3 decimals using the arrow
-keys on your keyboard.
 
 
 ## Installation
@@ -85,15 +74,6 @@ dd if=/dev/zero of=1000mb.bin bs=1 count=0 seek=1000M
 These commands only create the files in the filesystem.
 No bytes are actually written to the storage.
 The suffix `m` is megabytes and `g` is gigabytes and so on.
-
-Or you can download them from my server.
-
-**Please don't hotlink!!**
-
-* [1mb.bin](https://fvdm.com/speedtest/1mb.bin)
-* [5mb.bin](https://fvdm.com/speedtest/5mb.bin)
-* [10mb.bin](https://fvdm.com/speedtest/10mb.bin)
-* [100mb.bin](https://fvdm.com/speedtest/100mb.bin)
 
 
 ## Note on testing
