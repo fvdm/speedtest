@@ -8,11 +8,16 @@ It doesn't even require a backend language such as PHP
 and runs great on static hosting.
 
 You simply upload the `index.html` file and generate
-the binary testing files. The number precision can be
-changed up to 3 decimals using the arrow keys on your
-keyboard.
+the binary testing files.
 
-- [Example](#example)
+> [!TIP]
+> The number precision can be changed up to 3 decimals using the arrow keys on your keyboard.
+
+> [!TIP]
+> The speedtest is at its best when the connection is as
+> short as possible. For example, on your NAS or RPi to
+> check on your LAN bandwidth.
+
 - [Installation](#installation)
 - [Note on testing](#note-on-testing)
 - [Unlicense](#unlicense)
@@ -92,10 +97,6 @@ network both connected from Amsterdam and I got only 70 Mbit but using
 my provider's speedtest I get double at least. Doing the same to my
 LiquidSky box in Frankfurt I easily get over 900 Mbit. So there is a
 bottleneck somewhere between the web server and my home ISP.
-
-The speedtest is at its best when the connection is as
-short as possible. For example, on your NAS or RPi to
-check on your LAN bandwidth.
 
 
 Unlicense
